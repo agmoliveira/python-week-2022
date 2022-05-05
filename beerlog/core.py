@@ -16,7 +16,9 @@ def add_beer_to_database(
         session.commit()
     return True
 
-def get_beer_from_database():
+def get_beer_from_database(style: Optional[str] = None) -> List[Beer]:
     with get_session() as session:
         sql = select(Beer)
-        return session.exec(sql)
+        if style:
+            sql = sql.where(Beer.style == style)
+        return list(session.exec(sql))
