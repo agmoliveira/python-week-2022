@@ -3,6 +3,7 @@ from sqlmodel import select
 from beerlog.database import get_session
 from beerlog.models import Beer
 
+
 def add_beer_to_database(
     name: str,
     style: str,
@@ -15,6 +16,7 @@ def add_beer_to_database(
         session.add(beer)
         session.commit()
     return True
+
 
 def get_beer_from_database(style: Optional[str] = None) -> List[Beer]:
     with get_session() as session:
